@@ -83,13 +83,26 @@ class Matrix
     }
 
     // convert a 1d array to a matrix;
-    convertFromArray(n){
+    static convertFromArray(n){
       var m = new Matrix(n.length, 1);
       for (var i = 0; i < n.length; i++)
-        m[i][0] = n[i];
+        m.matrix[i][0] = n[i];
 
       return m;
     }
+
+    // convert a matrix to a 1d array;
+    convertToArray(n){
+      let array = [];
+
+      for (var i = 0; i < n.rows; i++)
+        for (var j = 0; j < n.columns; j++){
+          array.push(n.matrix[i][j]);
+        }
+
+      return array;
+    }
+
     // print the matrix to the console log in a tabular view
     print(){
       console.table(this.matrix);

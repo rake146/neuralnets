@@ -11,19 +11,28 @@ class NN{
 
     this.bias_h = new Matrix(this.hidden_nodes, 1);
     this.bias_o = new Matrix(this.output_nodes, 1);
-
+    this.bias_h.randomise();
+    this.bias_o.randomise();
   }
 
   forwardPropogate(input){
 
     // calculating the hidden outputs
     let inputs = Matrix.convertFromArray(input);
-    let hidden = Matrix.multiply(weights_ih, inputs);
+    let hidden = Matrix.multiply(this.weights_ih, inputs);
     hidden.add(this.bias_h);
 
     // activation function
     hidden.map(sigmoid);
 
+    // calculating the output's outputs
+    let output = Matrix.multiply(this.weights_ho, hidden);
+    output.add(this.bias_o);
+
+    // activation function
+    output.map(sigmoid);
+
+    return output.convertToArray(output);
   }
 
   backPropogate(){
@@ -35,4 +44,7 @@ function sigmoid(n){
   return (1 / (1 + Math.exp(-n)));
 }
 
-var network = new NN(2, 3, 2);
+var network = new NN(2, 2, 1);
+var input = [0, 1];
+var output = network.forwardPropogate(input);
+console.log(output);
