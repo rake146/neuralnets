@@ -13,6 +13,8 @@ class Matrix
         }
       }
     }
+
+    // initialise the matrix with a set of random values
     randomise(){
       for (var i = 0; i < this.rows; i++){
         for (var j = 0; j < this.columns; j++){
@@ -20,6 +22,7 @@ class Matrix
         }
       }
     }
+
     // multiplying a matrix with a parameter matrix or a scalar
     multiply(n){
       if (n instanceof Matrix){
@@ -44,6 +47,7 @@ class Matrix
           for (var j = 0; j < this.columns; j++)
             this.matrix[i][j] *= n;
     }
+
     // adding a scalar or matrix to base matrix
     add(n){
       if (n instanceof Matrix)
@@ -55,6 +59,7 @@ class Matrix
           for (var j = 0; j < this.columns; j++)
             this.matrix[i][j] += n;
     }
+    
     // transpose a matrix
     transpose(){
       var result = new Matrix(this.columns, this.rows);
@@ -66,6 +71,7 @@ class Matrix
       }
       return result;
     }
+
 }
 
 // matrix(rows,columns)
