@@ -18,7 +18,7 @@ class Matrix
     randomise(){
       for (var i = 0; i < this.rows; i++){
         for (var j = 0; j < this.columns; j++){
-          this.matrix[i][j] = Math.random();
+          this.matrix[i][j] = Math.floor(Math.random() * Math.floor(5));
         }
       }
     }
@@ -73,6 +73,15 @@ class Matrix
       return result;
     }
 
+    // maps a function to every element of the matrix
+    map(fn){
+      for (var i = 0; i < this.rows; i++)
+        for (var j = 0; j < this.columns; j++){
+          var temp = this.matrix[i][j];
+          this.matrix[i][j] = fn(temp);
+        }
+    }
+
     // print the matrix to the console log in a tabular view
     print(){
       console.table(this.matrix);
@@ -106,6 +115,19 @@ console.table(mat3.matrix);
 //mat.add(mat2);
 var multmatrix = Matrix.multiply(mat2, mat3);
 multmatrix.print();
+
+var mat4 = new Matrix(2, 2);
+mat4.randomise();
+mat4.print();
+
+function mul(n){
+  return n * 2;
+}
+
+mat4.map(mul);
+
+mat4.print();
+
 //var multmat = mat.transpose();
 //console.table(multmat.matrix);
 //console.table(mat.matrix);
