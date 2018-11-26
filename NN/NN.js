@@ -1,19 +1,18 @@
-const INPUT_LAYER = 2;
-const HIDDEN_LAYER = 2;
-const OUTPUT_LAYER = 2;
-
 class NN{
   constructor(INPUT_LAYER, HIDDEN_LAYER, OUTPUT_LAYER){
-    this.inputNodes = INPUT_LAYER;
-    this.hiddenNodes = HIDDEN_LAYER;
-    this.outputNodes = OUTPUT_LAYER;
+    this.input_nodes = INPUT_LAYER;
+    this.hidden_nodes = HIDDEN_LAYER;
+    this.output_nodes = OUTPUT_LAYER;
 
-    this.firstWeights[INPUT_LAYER * HIDDEN_LAYER];
-    this.secondWeights[HIDDEN_LAYER * OUTPUT_LAYER];
-    
+    this.weights_ih = new Matrix(this.hidden_nodes, this.input_nodes);
+    this.weights_ho = new Matrix(this.output_nodes, this.hidden_nodes);
+
+    this.weights_ih.randomise();
+    this.weights_ho.randomise();
+
   }
 
-  forwardPropogate(){
+  forwardPropogate(input){
 
   }
 
@@ -21,3 +20,5 @@ class NN{
 
   }
 }
+
+var network = new NN(2, 3, 2);

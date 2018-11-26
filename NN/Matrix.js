@@ -15,10 +15,10 @@ class Matrix
     }
 
     // initialise the matrix with a set of random values
-    randomise(){
+    randomise(){ // initialise with optimal weights coming soon TM
       for (var i = 0; i < this.rows; i++){
         for (var j = 0; j < this.columns; j++){
-          this.matrix[i][j] = Math.floor(Math.random() * Math.floor(5));
+          this.matrix[i][j] = Math.random() * 2 - 1;
         }
       }
     }
