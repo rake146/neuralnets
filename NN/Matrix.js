@@ -23,26 +23,27 @@ class Matrix
       }
     }
 
-    // multiplying a matrix with a parameter matrix or a scalar
-    multiply(n){
-      if (n instanceof Matrix){
-        var result = new Matrix(this.rows, n.columns);
+    // multiplying a matrix with another matrix
+    static multiply(a, b){
+      var result = new Matrix(a.rows, b.columns);
 
-        var tempTotal = 0;
+      var tempTotal = 0;
 
-        for (var firstMatrixRows = 0; firstMatrixRows < this.rows; firstMatrixRows++)
-          for (var secondMatrixCols = 0; secondMatrixCols < n.columns; secondMatrixCols++){
-            for (var firstMatrixCols = 0; firstMatrixCols < this.columns; firstMatrixCols++)
-            {
-              tempTotal += this.matrix[firstMatrixRows][firstMatrixCols] * n.matrix[firstMatrixCols][secondMatrixCols];
-            }
-            result.matrix[firstMatrixRows][secondMatrixCols] = tempTotal;
-            tempTotal = 0;
+      for (var firstMatrixRows = 0; firstMatrixRows < a.rows; firstMatrixRows++)
+        for (var secondMatrixCols = 0; secondMatrixCols < b.columns; secondMatrixCols++){
+          for (var firstMatrixCols = 0; firstMatrixCols < a.columns; firstMatrixCols++)
+          {
+            tempTotal += a.matrix[firstMatrixRows][firstMatrixCols] * b.matrix[firstMatrixCols][secondMatrixCols];
           }
-
-          return result;
+          result.matrix[firstMatrixRows][secondMatrixCols] = tempTotal;
+          tempTotal = 0;
         }
-      else
+
+        return result;
+    }
+
+    // multiplying a matrix with a scalar
+    multiply(n){
         for (var i = 0; i < this.rows; i++)
           for (var j = 0; j < this.columns; j++)
             this.matrix[i][j] *= n;
@@ -59,7 +60,7 @@ class Matrix
           for (var j = 0; j < this.columns; j++)
             this.matrix[i][j] += n;
     }
-    
+
     // transpose a matrix
     transpose(){
       var result = new Matrix(this.columns, this.rows);
@@ -70,6 +71,11 @@ class Matrix
         }
       }
       return result;
+    }
+
+    // print the matrix to the console log in a tabular view
+    print(){
+      console.table(this.matrix);
     }
 
 }
@@ -98,8 +104,8 @@ console.table(mat2.matrix);
 console.table(mat3.matrix);
 //console.table(mat2.matrix);
 //mat.add(mat2);
-var multmatrix = mat2.multiply(mat3);
-console.table(multmatrix.matrix)
+var multmatrix = Matrix.multiply(mat2, mat3);
+multmatrix.print();
 //var multmat = mat.transpose();
 //console.table(multmat.matrix);
 //console.table(mat.matrix);
